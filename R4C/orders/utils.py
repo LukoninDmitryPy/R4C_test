@@ -1,3 +1,5 @@
+import os
+
 from django.core.mail import send_mail
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -5,7 +7,7 @@ from django.dispatch import receiver
 from orders.models import Order
 from robots.models import Robot
 
-OWNER_MAIL = 'example@ex.ex'
+OWNER_MAIL = os.getenv('OWNER_MAIL')
 
 @receiver(post_save, sender=Robot)
 def notify_customers(sender, instance, **kwargs):
